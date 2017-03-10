@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.powerzhou.dogstudy.OwnApplication;
+import com.powerzhou.dogstudy.uimodule.dao.bean.account.DaoSession;
 
 import javax.inject.Singleton;
 
@@ -17,14 +18,21 @@ import dagger.Provides;
 public class AppModule {
 
     private final OwnApplication ownApplication;
-
-    public AppModule(OwnApplication ownApplication) {
+    private final DaoSession daoSession;
+    public AppModule(OwnApplication ownApplication,DaoSession daoSession) {
         this.ownApplication = ownApplication;
+        this.daoSession = daoSession;
     }
 
     @Provides
     @Singleton
     public Context getOwnApplication() {
         return ownApplication;
+    }
+
+    @Provides
+    @Singleton
+    public DaoSession getDaoSession() {
+        return daoSession;
     }
 }
