@@ -5,14 +5,15 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.powerzhou.dogstudy.injector.component.AppComponent;
 import com.powerzhou.dogstudy.injector.component.DaggerAppComponent;
 import com.powerzhou.dogstudy.injector.modules.AppModule;
+import com.powerzhou.dogstudy.rxbus.RxBus;
 import com.powerzhou.dogstudy.uimodule.dao.bean.account.DaoMaster;
 import com.powerzhou.dogstudy.uimodule.dao.bean.account.DaoSession;
 import com.powerzhou.dogstudy.util.Constant;
+import com.powerzhou.dogstudy.util.SDCardUtils;
 
 
 import java.io.File;
@@ -29,6 +30,7 @@ public class OwnApplication extends Application {
     private AppComponent appComponet;
 
     private DaoSession mDaoSession;
+    private RxBus rxBus = new RxBus();
 
     @Override
     public void onCreate() {
@@ -39,7 +41,7 @@ public class OwnApplication extends Application {
     }
 
     private void _initInjector (){
-        appComponet = DaggerAppComponent.builder().appModule(new AppModule(this,mDaoSession)).build();
+        appComponet = DaggerAppComponent.builder().appModule(new AppModule(this,mDaoSession,rxBus)).build();
     }
 
     /**
@@ -56,8 +58,7 @@ public class OwnApplication extends Application {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(new ContextWrapper(this) {
             @Override
             public File getDatabasePath(String name) {
-                boolean sdExist = android.os.Environment.MEDIA_MOUNTED.equals(android.os.Environment.getExternalStorageState());
-                if (!sdExist) {
+                if (!SDCardUtils.isAvailable()) {
                     return null;
                 } else {
                     String dbPath = getRootPath() + File.separator +Constant.DIR_DB +File.separator +name;
@@ -66,7 +67,6 @@ public class OwnApplication extends Application {
                         try {
                             file.createNewFile();
                         }catch (Exception e){
-
                         }
                     }
                     return file;
@@ -88,7 +88,7 @@ public class OwnApplication extends Application {
     }
 
     public static String getRootPath(){
-        return android.os.Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+ Constant.DIR_ROOT;
+        return SDCardUtils.getSDPath()+File.separator+ Constant.DIR_ROOT;
     }
 
     private void _initDir(){

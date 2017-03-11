@@ -4,4 +4,6 @@
     <item type="id" name="rl_empty_container">false</item>
     <item type="id" name="tv_net_error">false</item>
     <item type="id" name="empty_loading">false</item>
+    <item type="id" name="swipe_refresh">false</item>
+
 </resources>

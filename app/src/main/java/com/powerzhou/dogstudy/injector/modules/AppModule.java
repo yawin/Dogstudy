@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.powerzhou.dogstudy.OwnApplication;
+import com.powerzhou.dogstudy.rxbus.RxBus;
 import com.powerzhou.dogstudy.uimodule.dao.bean.account.DaoSession;
 
 import javax.inject.Singleton;
@@ -19,9 +20,12 @@ public class AppModule {
 
     private final OwnApplication ownApplication;
     private final DaoSession daoSession;
-    public AppModule(OwnApplication ownApplication,DaoSession daoSession) {
+    private final RxBus rxBus;
+
+    public AppModule(OwnApplication ownApplication,DaoSession daoSession,RxBus rxBus) {
         this.ownApplication = ownApplication;
         this.daoSession = daoSession;
+        this.rxBus = rxBus;
     }
 
     @Provides
@@ -34,5 +38,11 @@ public class AppModule {
     @Singleton
     public DaoSession getDaoSession() {
         return daoSession;
+    }
+
+    @Provides
+    @Singleton
+    public RxBus getRxBus(){
+        return rxBus;
     }
 }
