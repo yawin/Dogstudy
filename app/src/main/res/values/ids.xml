@@ -18,6 +18,8 @@
     <item type="id" name="tool_bar">false</item>
     <item type="id" name="tab_layout">false</item>
     <item type="id" name="view_pager">false</item>
+    <item type="id" name="webview">false</item>
+
 
 
 </resources>
