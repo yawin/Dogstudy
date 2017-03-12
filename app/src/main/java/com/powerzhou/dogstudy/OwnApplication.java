@@ -14,6 +14,7 @@ import com.powerzhou.dogstudy.uimodule.dao.bean.account.DaoMaster;
 import com.powerzhou.dogstudy.uimodule.dao.bean.account.DaoSession;
 import com.powerzhou.dogstudy.util.Constant;
 import com.powerzhou.dogstudy.util.SDCardUtils;
+import com.powerzhou.dogstudy.util.ToastUtils;
 
 
 import java.io.File;
@@ -38,6 +39,7 @@ public class OwnApplication extends Application {
         _initDir();
         _initDatabase();
         _initInjector();
+        _initConfig();
     }
 
     private void _initInjector (){
@@ -89,6 +91,11 @@ public class OwnApplication extends Application {
 
     public static String getRootPath(){
         return SDCardUtils.getSDPath()+File.separator+ Constant.DIR_ROOT;
+    }
+
+
+    private void _initConfig() {
+        ToastUtils.init(appComponet.getContext());
     }
 
     private void _initDir(){

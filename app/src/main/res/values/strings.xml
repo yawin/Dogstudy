@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Dogstudy</string>
     <string name="slogan">made for programmer</string>
+    <string name="next_step">跳过...%s</string>
+
+    <string name="nav_study">学习</string>
+    <string name="nav_setting">设置</string>
+    <string name="exit_tip_again">再按一次退出程序</string>
+
 </resources>

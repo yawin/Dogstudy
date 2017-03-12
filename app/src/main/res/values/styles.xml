@@ -1,5 +1,9 @@
 <resources>
 
+    <declare-styleable name="EmptyLayout">
+        <attr name="background_color" format="color"/>
+    </declare-styleable>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">true</item>

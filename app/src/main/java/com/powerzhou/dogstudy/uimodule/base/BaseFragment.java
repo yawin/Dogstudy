@@ -36,6 +36,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends RxFragment 
     @Nullable
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
+
     @Inject
     protected T mPresenter;
 

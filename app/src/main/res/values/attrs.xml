@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <declare-styleable name="EmptyLayout">
-        <attr name="background_color" format="color"/>
-    </declare-styleable>
-
+    <!--<attr name="colorPrimaryLocal" format="reference|color"/>-->
+    <!--<attr name="colorPrimaryDarkLocal" format="reference|color"/>-->
+    <!--<attr name="colorAccentLocal" format="reference|color"/>-->
 </resources>

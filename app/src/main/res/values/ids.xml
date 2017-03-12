@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <item type="id" name="fl_container">false</item>
+    <item type="id" name="activity_main">false</item>
     <item type="id" name="empty_layout">false</item>
     <item type="id" name="rl_empty_container">false</item>
     <item type="id" name="tv_net_error">false</item>
     <item type="id" name="empty_loading">false</item>
     <item type="id" name="swipe_refresh">false</item>
+    <item type="id" name="btn_next">false</item>
+    <item type="id" name="iv_avatar">false</item>
+    <item type="id" name="nav_view">false</item>
+    <item type="id" name="nav_item_study">false</item>
+    <item type="id" name="nav_item_setting">false</item>
+    <item type="id" name="fragment_study">false</item>
+
+    <item type="id" name="tool_bar">false</item>
+    <item type="id" name="tab_layout">false</item>
+    <item type="id" name="view_pager">false</item>
+
 
 </resources>
