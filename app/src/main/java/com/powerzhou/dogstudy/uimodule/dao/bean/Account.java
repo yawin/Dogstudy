@@ -1,4 +1,4 @@
-package com.powerzhou.dogstudy.uimodule.dao.bean.account;
+package com.powerzhou.dogstudy.uimodule.dao.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;

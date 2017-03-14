@@ -30,7 +30,7 @@ configurations.all {
 }
 
 greendao {
-    schemaVersion 1
+    schemaVersion 2
 //    daoPackage 'com.powerzhou.dogstudy'
 //    targetGenDir 'src/main/java'
 }
@@ -50,6 +50,10 @@ dependencies {
     compile "com.android.support:support-v4:${rootProject.ext.support}"
     compile "com.android.support:design:${rootProject.ext.support}"
     testCompile 'junit:junit:4.12'
+    //leakcanary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     //dagger
     apt 'com.google.dagger:dagger-compiler:2.6'
     compile 'com.google.dagger:dagger:2.6'
@@ -67,5 +71,8 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.trello:rxlifecycle:1.0'
     compile 'com.trello:rxlifecycle-components:1.0'
+
+    compile 'com.zzhoujay.richtext:richtext:2.4.0'
+
     compile project(':arithmeticlib')
 }

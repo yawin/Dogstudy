@@ -1,11 +1,10 @@
 package com.powerzhou.dogstudy.injector.modules;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.powerzhou.dogstudy.OwnApplication;
 import com.powerzhou.dogstudy.rxbus.RxBus;
-import com.powerzhou.dogstudy.uimodule.dao.bean.account.DaoSession;
+import com.powerzhou.dogstudy.uimodule.dao.bean.DaoSession;
 
 import javax.inject.Singleton;
 

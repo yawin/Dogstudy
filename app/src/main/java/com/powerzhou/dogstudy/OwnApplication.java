@@ -10,11 +10,13 @@ import com.powerzhou.dogstudy.injector.component.AppComponent;
 import com.powerzhou.dogstudy.injector.component.DaggerAppComponent;
 import com.powerzhou.dogstudy.injector.modules.AppModule;
 import com.powerzhou.dogstudy.rxbus.RxBus;
-import com.powerzhou.dogstudy.uimodule.dao.bean.account.DaoMaster;
-import com.powerzhou.dogstudy.uimodule.dao.bean.account.DaoSession;
+import com.powerzhou.dogstudy.uimodule.dao.bean.DaoMaster;
+import com.powerzhou.dogstudy.uimodule.dao.bean.DaoSession;
+import com.powerzhou.dogstudy.uimodule.dao.operate.StudyDao;
 import com.powerzhou.dogstudy.util.Constant;
 import com.powerzhou.dogstudy.util.SDCardUtils;
 import com.powerzhou.dogstudy.util.ToastUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 
 import java.io.File;
@@ -28,7 +30,7 @@ public class OwnApplication extends Application {
 
     private static final String DB_NAME = "info_db.db";
 
-    private AppComponent appComponet;
+    private static AppComponent appComponet;
 
     private DaoSession mDaoSession;
     private RxBus rxBus = new RxBus();
@@ -36,6 +38,9 @@ public class OwnApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+
+        }
         _initDir();
         _initDatabase();
         _initInjector();
@@ -49,8 +54,12 @@ public class OwnApplication extends Application {
     /**
      * @return Application Context
      */
-    public Context getOwnApplication(){
+    public Context getApplication(){
         return appComponet.getContext();
+    }
+
+    public static AppComponent getAppComponet(){
+        return appComponet;
     }
 
     /**
@@ -96,6 +105,8 @@ public class OwnApplication extends Application {
 
     private void _initConfig() {
         ToastUtils.init(appComponet.getContext());
+        LeakCanary.install(this);
+        StudyDao.updateStudyChannelData(this,mDaoSession);
     }
 
     private void _initDir(){

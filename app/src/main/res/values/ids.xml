@@ -14,12 +14,11 @@
     <item type="id" name="nav_item_study">false</item>
     <item type="id" name="nav_item_setting">false</item>
     <item type="id" name="fragment_study">false</item>
-
     <item type="id" name="tool_bar">false</item>
     <item type="id" name="tab_layout">false</item>
     <item type="id" name="view_pager">false</item>
     <item type="id" name="webview">false</item>
-
-
+    <item type="id" name="item_channel">false</item>
+    <item type="id" name="study_content_view">false</item>
 
 </resources>

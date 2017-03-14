@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.powerzhou.dogstudy.OwnApplication;
 import com.powerzhou.dogstudy.R;
+import com.powerzhou.dogstudy.injector.component.AppComponent;
 import com.powerzhou.dogstudy.uimodule.widget.EmptyLayout;
 import com.powerzhou.dogstudy.util.SwipeRefreshHelper;
 import com.trello.rxlifecycle.LifecycleTransformer;
@@ -144,7 +146,14 @@ public abstract class BaseFragment<T extends IBasePresenter> extends RxFragment 
             });
         }
     }
-
+    /**
+     * 获取 ApplicationComponent
+     *
+     * @return ApplicationComponent
+     */
+    protected AppComponent getAppComponent() {
+        return OwnApplication.getAppComponet();
+    }
     /**
      * 绑定布局文件
      * @return  布局文件ID
