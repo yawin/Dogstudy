@@ -1,0 +1,22 @@
+[
+  {
+    "name": "数据结构与算法",
+    "typeId": "S03",
+    "typeName": "arithmetic"
+  },
+  {
+    "name": "Android",
+    "typeId": "S01",
+    "typeName": "android"
+  },
+  {
+    "name": "Java",
+    "typeId": "S02",
+    "typeName": "java"
+  },
+  {
+    "name": "设计模式",
+    "typeId": "S04",
+    "typeName": "design"
+  }
+]

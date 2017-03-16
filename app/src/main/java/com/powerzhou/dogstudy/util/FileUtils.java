@@ -55,6 +55,10 @@ public class FileUtils {
         throw new AssertionError();
     }
 
+    public static StringBuilder readFile(String filePath) {
+        return readFile(filePath,"UTF-8");
+    }
+
     /**
      * read file
      * 
@@ -67,7 +71,7 @@ public class FileUtils {
         File file = new File(filePath);
         StringBuilder fileContent = new StringBuilder("");
         if (file == null || !file.isFile()) {
-            return null;
+            return fileContent;
         }
 
         BufferedReader reader = null;

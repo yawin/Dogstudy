@@ -2,6 +2,7 @@ package com.powerzhou.dogstudy.presenter;
 
 import com.powerzhou.dogstudy.rxbus.RxBus;
 import com.powerzhou.dogstudy.uimodule.base.IRxBusPresenter;
+import com.powerzhou.dogstudy.uimodule.dao.bean.BaseParam;
 import com.powerzhou.dogstudy.uimodule.study.subview.IStudyContentView;
 
 import rx.Subscription;
@@ -19,6 +20,16 @@ public class StudyContentPresenter implements IRxBusPresenter {
     public StudyContentPresenter(IStudyContentView studyContentView, RxBus rxBus) {
         this.studyContentView = studyContentView;
         this.rxBus = rxBus;
+    }
+
+    @Override
+    public void getData(BaseParam baseParam) {
+
+    }
+
+    @Override
+    public void getMoreData(BaseParam baseParam) {
+
     }
 
     @Override

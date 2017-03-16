@@ -2,12 +2,17 @@ package com.powerzhou.dogstudy.uimodule.dao.operate;
 
 import android.content.Context;
 
+import com.powerzhou.dogstudy.OwnApplication;
 import com.powerzhou.dogstudy.uimodule.dao.bean.DaoSession;
 import com.powerzhou.dogstudy.uimodule.dao.bean.StudyType;
 import com.powerzhou.dogstudy.uimodule.dao.bean.StudyTypeDao;
 import com.powerzhou.dogstudy.util.AssetsHelper;
+import com.powerzhou.dogstudy.util.Constant;
+import com.powerzhou.dogstudy.util.FileUtils;
 import com.powerzhou.dogstudy.util.GsonHelper;
+import com.powerzhou.dogstudy.util.StringUtils;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -15,32 +20,37 @@ import java.util.List;
  */
 
 public class StudyDao {
-    // 所有栏目
-    private static List<StudyType> sAllChannels;
-
+    private static final String sourceRootPath = OwnApplication.getRootPath()+ File.separator+ Constant.DIR_SOURCE;
     private StudyDao() {
     }
 
     /**
-     * 更新本地数据，如果数据库新闻列表栏目为 0 则添加头 3 个栏目
-     *
      * @param context
      * @param daoSession
      */
     public static void updateStudyChannelData(Context context, DaoSession daoSession) {
-        sAllChannels = GsonHelper.convertEntities(AssetsHelper.readData(context, "StudyChannel"), StudyType.class);
-        StudyTypeDao beanDao = daoSession.getStudyTypeDao();
-        if (beanDao.count() == 0) {
-            beanDao.insertInTx(sAllChannels.subList(0, 4));
+        String sourceFilePath = sourceRootPath + File.separator+Constant.FILE_STUDYCHANNEL;
+        try {
+            List<StudyType> sAllChannels = GsonHelper.convertEntities(FileUtils.readFile(sourceFilePath).toString(), StudyType.class);
+            StudyTypeDao beanDao = daoSession.getStudyTypeDao();
+            if (beanDao.count() == 0) {
+                beanDao.insertInTx(sAllChannels);
+            }else{
+                beanDao.deleteAll();
+                beanDao.insertInTx(sAllChannels);
+            }
+        }catch (Exception e){
         }
     }
 
-    /**
-     * 获取所有栏目
-     *
-     * @return
-     */
-    public static List<StudyType> getAllChannels() {
-        return sAllChannels;
+    public static File[] getFileListByStudyType(String studyType){
+        if(StringUtils.isEmpty(studyType)){
+            return null;
+        }
+        String typePath = sourceRootPath + File.separator + studyType;
+        if(FileUtils.isFolderExist(typePath)){
+            return FileUtils.getFileList(typePath);
+        }
+        return null;
     }
 }

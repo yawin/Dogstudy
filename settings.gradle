@@ -1,1 +1,1 @@
-include ':app', ':arithmeticlib'
+include ':app', ':arithmeticlib', ':recylerviewadapterlib'

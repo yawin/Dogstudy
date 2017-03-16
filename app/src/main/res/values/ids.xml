@@ -20,5 +20,9 @@
     <item type="id" name="webview">false</item>
     <item type="id" name="item_channel">false</item>
     <item type="id" name="study_content_view">false</item>
+    <item type="id" name="study_list_view">false</item>
+
+    <item type="id" name="tx_study_item">false</item>
+
 
 </resources>

@@ -12,12 +12,14 @@ import com.powerzhou.dogstudy.injector.modules.StudyContentFragmentModule;
 import com.powerzhou.dogstudy.uimodule.base.BaseFragment;
 import com.powerzhou.dogstudy.uimodule.base.IRxBusPresenter;
 import com.powerzhou.dogstudy.uimodule.dao.bean.StudyType;
+import com.powerzhou.dogstudy.uimodule.dao.operate.StudyDao;
 import com.powerzhou.dogstudy.util.AssetsHelper;
 import com.powerzhou.dogstudy.util.LogUtil;
 import com.zzhoujay.richtext.RichText;
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -28,18 +30,18 @@ import butterknife.BindView;
  */
 
 public class StudyContentFragment extends BaseFragment<IRxBusPresenter> implements IStudyContentView {
-    private static final String CHANNEL_TYPE_KEY = "ChannelTypeKey";
+    private static final String FILE_PATH = "filepath";
 
     @BindView(R.id.study_content_view)
     LinearLayout content;
 
-    private String channelType;
+    private String filepath;
 
 
-    public static StudyContentFragment newInstance(String channelType) {
+    public static StudyContentFragment newInstance(String filepath) {
         StudyContentFragment fragment = new StudyContentFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(CHANNEL_TYPE_KEY, channelType);
+        bundle.putString(FILE_PATH, filepath);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -48,7 +50,7 @@ public class StudyContentFragment extends BaseFragment<IRxBusPresenter> implemen
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            channelType = getArguments().getString(CHANNEL_TYPE_KEY);
+            filepath = getArguments().getString(FILE_PATH);
         }
     }
 
@@ -73,24 +75,10 @@ public class StudyContentFragment extends BaseFragment<IRxBusPresenter> implemen
 
     @Override
     protected void updateViews() {
-        String[] result = AssetsHelper.readLists(getContext(),channelType);
-        for(String res : result){
-            LogUtil.d(res);
-        }
-        if(channelType.equals("arithmetic")) {
-            String ss = AssetsHelper.readData(getContext(), channelType + "/BinaryInsertSort.md");
-            if(ss == null){
-                return;
-            }
-            LogUtil.d(ss);
-            TextView textView = new TextView(getContext());
-            textView.setTextColor(Color.BLACK);
-            RichText.fromMarkdown(ss).into(textView);
-            content.addView(textView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        }
     }
 
     @Override
-    public void loadData(StudyType studyType) {
+    public void loadData(String filepath) {
+
     }
 }

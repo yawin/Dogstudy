@@ -16,7 +16,7 @@ import com.powerzhou.dogstudy.rxbus.event.ChannelEvent;
 import com.powerzhou.dogstudy.uimodule.base.BaseFragment;
 import com.powerzhou.dogstudy.uimodule.base.IRxBusPresenter;
 import com.powerzhou.dogstudy.uimodule.dao.bean.StudyType;
-import com.powerzhou.dogstudy.uimodule.study.subview.StudyContentFragment;
+import com.powerzhou.dogstudy.uimodule.study.subviewlist.StudyListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class StudyFragment extends BaseFragment<IRxBusPresenter> implements IStu
         List<String> titles = new ArrayList<>();
         for (StudyType bean : typeList) {
             titles.add(bean.getName());
-            fragments.add(StudyContentFragment.newInstance(bean.getTypeName()));
+            fragments.add(StudyListFragment.newInstance(bean.getTypeName()));
         }
         mPageAdapter.setItems(fragments, titles);
     }
@@ -90,7 +90,7 @@ public class StudyFragment extends BaseFragment<IRxBusPresenter> implements IStu
     private void _handleChannelEvent(ChannelEvent channelEvent) {
         switch (channelEvent.eventType) {
             case ChannelEvent.ADD_EVENT:
-                mPageAdapter.addItem(StudyContentFragment.newInstance(channelEvent.studyType.getTypeName()),channelEvent.studyType.getName());
+                mPageAdapter.addItem(StudyListFragment.newInstance(channelEvent.studyType.getTypeName()),channelEvent.studyType.getName());
                 break;
             case ChannelEvent.DEL_EVENT:
                 // 如果是删除操作直接切换第一项，不然容易出现加载到不存在的Fragment
