@@ -1,1 +1,2 @@
-this is a study app for interview
+###this is a study app for progammer.
+---study every day!
