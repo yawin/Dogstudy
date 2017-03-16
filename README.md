@@ -1,2 +1,2 @@
 ### this is a study app for progammer.
---- study every day!
+# study every day!
