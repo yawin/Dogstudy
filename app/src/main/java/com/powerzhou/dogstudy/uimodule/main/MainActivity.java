@@ -146,18 +146,4 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showNetError(EmptyLayout.OnRetryListener onRetryListener) {
-
-    }
 }

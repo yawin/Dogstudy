@@ -17,5 +17,5 @@ public class Constant {
     /**
      * 学习
      */
-    public static final String FILE_STUDYCHANNEL = "StudyChannel.json";
+    public static final String FILE_STUDYCHANNEL = "StudyInfos.json";
 }

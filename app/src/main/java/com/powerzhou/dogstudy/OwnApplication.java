@@ -14,6 +14,7 @@ import com.powerzhou.dogstudy.uimodule.dao.bean.DaoMaster;
 import com.powerzhou.dogstudy.uimodule.dao.bean.DaoSession;
 import com.powerzhou.dogstudy.uimodule.dao.operate.StudyDao;
 import com.powerzhou.dogstudy.util.Constant;
+import com.powerzhou.dogstudy.util.LogUtil;
 import com.powerzhou.dogstudy.util.SDCardUtils;
 import com.powerzhou.dogstudy.util.ToastUtils;
 import com.squareup.leakcanary.LeakCanary;
@@ -32,22 +33,21 @@ public class OwnApplication extends Application {
 
     private static AppComponent appComponet;
 
+    private static OwnApplication instance;
+
     private DaoSession mDaoSession;
-    private RxBus rxBus = new RxBus();
+    private RxBus rxBus = null;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-
-        }
-        _initDir();
-        _initDatabase();
-        _initInjector();
-        _initConfig();
+        LogUtil.d("OwnApplication OnCreate");
+        ToastUtils.init(this);
+        instance = this;
     }
 
-    private void _initInjector (){
+    public void initInjector (){
+        rxBus = new RxBus();
         appComponet = DaggerAppComponent.builder().appModule(new AppModule(this,mDaoSession,rxBus)).build();
     }
 
@@ -58,6 +58,10 @@ public class OwnApplication extends Application {
         return appComponet.getContext();
     }
 
+    public static OwnApplication getOwnApplication(){
+        return instance;
+    }
+
     public static AppComponent getAppComponet(){
         return appComponet;
     }
@@ -65,7 +69,7 @@ public class OwnApplication extends Application {
     /**
      * 初始化数据库
      */
-    private void _initDatabase() {
+    public void initDatabase() {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(new ContextWrapper(this) {
             @Override
             public File getDatabasePath(String name) {
@@ -102,14 +106,12 @@ public class OwnApplication extends Application {
         return SDCardUtils.getSDPath()+File.separator+ Constant.DIR_ROOT;
     }
 
-
-    private void _initConfig() {
-        ToastUtils.init(appComponet.getContext());
+    public void initConfig() {
         LeakCanary.install(this);
-        StudyDao.updateStudyChannelData(this,mDaoSession);
+        StudyDao.getInstance().initStudyData(this);
     }
 
-    private void _initDir(){
+    public void initDir(){
         String rootDir = getRootPath();
         File rootFile = new File(rootDir);
         if(!rootFile.exists()){

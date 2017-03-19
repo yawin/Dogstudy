@@ -94,17 +94,17 @@ public abstract class BaseFragment<T extends IBasePresenter> extends RxFragment 
     public void showLoading() {
         if (mEmptyLayout != null) {
             mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
-            SwipeRefreshHelper.enableRefresh(mSwipeRefresh, false);
         }
+        SwipeRefreshHelper.enableRefresh(mSwipeRefresh, false);
     }
 
     @Override
     public void hideLoading() {
         if (mEmptyLayout != null) {
             mEmptyLayout.hide();
-            SwipeRefreshHelper.enableRefresh(mSwipeRefresh, true);
-            SwipeRefreshHelper.controlRefresh(mSwipeRefresh, false);
         }
+        SwipeRefreshHelper.enableRefresh(mSwipeRefresh, true);
+        SwipeRefreshHelper.controlRefresh(mSwipeRefresh, false);
     }
 
     @Override
@@ -112,8 +112,8 @@ public abstract class BaseFragment<T extends IBasePresenter> extends RxFragment 
         if (mEmptyLayout != null) {
             mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_NET);
             mEmptyLayout.setRetryListener(onRetryListener);
-            SwipeRefreshHelper.enableRefresh(mSwipeRefresh, false);
         }
+        SwipeRefreshHelper.enableRefresh(mSwipeRefresh, false);
     }
 
     @Override

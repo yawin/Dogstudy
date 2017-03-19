@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppBaseTheme">
         <activity android:name=".uimodule.main.BeginActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

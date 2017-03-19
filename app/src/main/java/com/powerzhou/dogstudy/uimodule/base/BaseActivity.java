@@ -161,5 +161,26 @@ public abstract class BaseActivity<T extends IBasePresenter> extends RxAppCompat
     public <T> LifecycleTransformer<T> bindToLife() {
         return this.<T>bindToLifecycle();
     }
+    @Override
+    public void showLoading() {
+        if (mEmptyLayout != null) {
+            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+        }
+    }
+
+    @Override
+    public void hideLoading() {
+        if (mEmptyLayout != null) {
+            mEmptyLayout.hide();
+        }
+    }
+
+    @Override
+    public void showNetError(final EmptyLayout.OnRetryListener onRetryListener) {
+        if (mEmptyLayout != null) {
+            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_NET);
+            mEmptyLayout.setRetryListener(onRetryListener);
+        }
+    }
 
 }

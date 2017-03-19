@@ -23,6 +23,10 @@
     <item type="id" name="study_list_view">false</item>
 
     <item type="id" name="tx_study_item">false</item>
+    <item type="id" name="iv_begin">false</item>
+    <item type="id" name="bp_begin">false</item>
+    <item type="id" name="tv_begin">false</item>
 
+    <item type="id" name="container_study_list">false</item>
 
 </resources>

@@ -1,14 +1,11 @@
 package com.powerzhou.dogstudy.injector.modules;
 
 import com.powerzhou.dogstudy.injector.PerFragment;
-import com.powerzhou.dogstudy.presenter.StudyContentPresenter;
-import com.powerzhou.dogstudy.presenter.StudyPresenter;
 import com.powerzhou.dogstudy.rxbus.RxBus;
 import com.powerzhou.dogstudy.uimodule.base.IRxBusPresenter;
 import com.powerzhou.dogstudy.uimodule.dao.bean.DaoSession;
-import com.powerzhou.dogstudy.uimodule.study.StudyFragment;
-import com.powerzhou.dogstudy.uimodule.study.ViewPagerAdapter;
 import com.powerzhou.dogstudy.uimodule.study.subview.StudyContentFragment;
+import com.powerzhou.dogstudy.uimodule.study.subview.StudyContentPresenter;
 
 import dagger.Module;
 import dagger.Provides;

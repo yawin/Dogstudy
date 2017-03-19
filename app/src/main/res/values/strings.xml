@@ -9,4 +9,9 @@
 
     <string name="study_menu_channel_manager">栏目管理</string>
 
+    <string name="begin_tip">Stay Hungry，Stay Foolish!</string>
+    <string name="begin_no_permission">没有读写SD权限，自动退出！</string>
+
+    <string name="tab_internet">在线数据</string>
+    <string name="tab_local">本地数据</string>
 </resources>

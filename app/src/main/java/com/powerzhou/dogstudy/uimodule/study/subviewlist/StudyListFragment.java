@@ -1,32 +1,30 @@
 package com.powerzhou.dogstudy.uimodule.study.subviewlist;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
 
 import com.powerzhou.dogstudy.R;
-import com.powerzhou.dogstudy.injector.component.DaggerStudyContentFragmentComponent;
 import com.powerzhou.dogstudy.injector.component.DaggerStudyListFragmentComponent;
-import com.powerzhou.dogstudy.injector.modules.StudyContentFragmentModule;
 import com.powerzhou.dogstudy.injector.modules.StudyListFragmentModule;
 import com.powerzhou.dogstudy.uimodule.base.BaseFragment;
 import com.powerzhou.dogstudy.uimodule.base.IRxBusPresenter;
+import com.powerzhou.dogstudy.uimodule.dao.bean.StudyInfo;
 import com.powerzhou.dogstudy.uimodule.dao.bean.StudyListParam;
-import com.powerzhou.dogstudy.uimodule.dao.bean.StudyType;
-import com.powerzhou.dogstudy.uimodule.dao.operate.StudyDao;
-import com.powerzhou.dogstudy.uimodule.study.adapter.StudyListAdapter;
-import com.powerzhou.dogstudy.uimodule.study.subview.IStudyContentView;
+import com.powerzhou.recylerview.adapter.BaseQuickAdapter;
+import com.powerzhou.recylerview.helper.RecyclerViewHelper;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import butterknife.BindView;
+import javax.inject.Inject;
 
-import static android.R.id.list;
+import butterknife.BindView;
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter;
+
 
 /**
  * Created by Administrator on 2017/3/14 0014.
@@ -39,7 +37,10 @@ public class StudyListFragment extends BaseFragment<IRxBusPresenter> implements 
     RecyclerView recyclerView;
 
     private String channelType;
-    private StudyListAdapter adapter;
+
+    @Inject
+    BaseQuickAdapter mAdapter;
+
 
     public static StudyListFragment newInstance(String channelType) {
         StudyListFragment fragment = new StudyListFragment();
@@ -56,6 +57,8 @@ public class StudyListFragment extends BaseFragment<IRxBusPresenter> implements 
             channelType = getArguments().getString(CHANNEL_TYPE_KEY);
         }
     }
+
+
     @Override
     protected int attachLayoutRes() {
         return R.layout.fragment_study_list;
@@ -68,26 +71,37 @@ public class StudyListFragment extends BaseFragment<IRxBusPresenter> implements 
     }
     @Override
     protected void initViews() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new StudyListAdapter(R.layout.adapter_study_list_item);
-        recyclerView.setAdapter(adapter);
-
+        SlideInRightAnimationAdapter animAdapter = new SlideInRightAnimationAdapter(mAdapter);
+        RecyclerViewHelper.initRecyclerViewV(mContext, recyclerView, true, new AlphaInAnimationAdapter(animAdapter));
+//        mAdapter.setRequestDataListener(new OnRequestDataListener() {
+//            @Override
+//            public void onLoadMore() {
+//                mPresenter.getMoreData();
+//            }
+//        });
     }
+
     @Override
     protected void updateViews() {
         mPresenter.getData(new StudyListParam(channelType));
     }
 
     @Override
-    public void loadData(File[] content) {
-      if(content != null && content.length > 0){
-          List<File> list = new ArrayList<>();
-          for(File file : content){
-              list.add(file);
-          }
-          adapter.setNewData(list);
-      }else{
-          // TODO: 2017/3/16 0016
-      }
+    public void loadData(List<StudyInfo> list) {
+        if (list != null && list.size() > 0) {
+            mAdapter.updateItems(list);
+        } else {
+            // TODO: 2017/3/16 0016
+        }
+    }
+
+    @Override
+    public void loadMoreData(List<StudyInfo> data) {
+
+    }
+
+    @Override
+    public void loadNoData() {
+
     }
 }

@@ -1,13 +1,13 @@
 package com.powerzhou.dogstudy.injector.modules;
 
 import com.powerzhou.dogstudy.injector.PerFragment;
-import com.powerzhou.dogstudy.presenter.StudyContentPresenter;
-import com.powerzhou.dogstudy.presenter.StudyListPresenter;
 import com.powerzhou.dogstudy.rxbus.RxBus;
 import com.powerzhou.dogstudy.uimodule.base.IRxBusPresenter;
 import com.powerzhou.dogstudy.uimodule.dao.bean.DaoSession;
-import com.powerzhou.dogstudy.uimodule.study.subview.StudyContentFragment;
+import com.powerzhou.dogstudy.uimodule.study.subviewlist.StudyListAdapter;
 import com.powerzhou.dogstudy.uimodule.study.subviewlist.StudyListFragment;
+import com.powerzhou.dogstudy.uimodule.study.subviewlist.StudyListPresenter;
+import com.powerzhou.recylerview.adapter.BaseQuickAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -30,4 +30,10 @@ public class StudyListFragmentModule {
         return new StudyListPresenter(fragment,rxBus);
     }
 
+
+    @PerFragment
+    @Provides
+    public BaseQuickAdapter provideAdapter() {
+        return new StudyListAdapter(fragment.getContext());
+    }
 }

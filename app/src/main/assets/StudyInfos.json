@@ -1,0 +1,21 @@
+[
+  {
+    "itemInfoList": [
+    ],
+    "studyType": {
+      "typeName": "数据结构与算法"
+    }
+  },
+  {
+    "itemInfoList": [
+      {
+        "address": "http://blog.csdn.net/yawinstake/article/details/54578096",
+        "title": "单例模式的七种写法以及注意事项",
+        "type": "设计模式"
+      }
+    ],
+    "studyType": {
+      "typeName": "设计模式"
+    }
+  }
+]
