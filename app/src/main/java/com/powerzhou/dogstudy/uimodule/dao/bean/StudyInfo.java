@@ -13,9 +13,9 @@ import java.util.List;
  */
 
 public class StudyInfo extends MultiItemEntity {
-
-    public static final int ITEM_TYPE_ITERNET = 1;
-    public static final int ITEM_TYPE_LOCAL = 2;
+    //default type
+    public static final int ITEM_TYPE_ITERNET = 0;
+    public static final int ITEM_TYPE_LOCAL = 1;
 
     private StudyType studyType;
 

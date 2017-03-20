@@ -5,9 +5,9 @@ package com.powerzhou.dogstudy.uimodule.dao.bean;
  */
 
 public class StudyListParam extends BaseParam {
-    public String channelType;
+    public int studyType;
 
-    public StudyListParam(String channelType) {
-        this.channelType = channelType;
+    public StudyListParam(int studyType) {
+        this.studyType = studyType;
     }
 }

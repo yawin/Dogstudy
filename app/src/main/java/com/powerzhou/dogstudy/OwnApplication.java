@@ -70,7 +70,9 @@ public class OwnApplication extends Application {
      * 初始化数据库
      */
     public void initDatabase() {
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(new ContextWrapper(this) {
+        DaoMaster.DevOpenHelper helper = null;
+//        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getApplication(), DB_NAME);
+        helper = new DaoMaster.DevOpenHelper(new ContextWrapper(this) {
             @Override
             public File getDatabasePath(String name) {
                 if (!SDCardUtils.isAvailable()) {

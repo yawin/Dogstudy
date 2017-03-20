@@ -39,46 +39,43 @@ public class StudyListPresenter implements IRxBusPresenter {
     public void getData(BaseParam baseParam) {
         if (baseParam != null && baseParam instanceof StudyListParam) {
             StudyListParam studyListParam = (StudyListParam) baseParam;
-//            File[] files = StudyDao.getAllFolders();
-//            List<StudyInfo> infoList = new ArrayList<>();
-//            StudyInfo info = null;
-//            if (files != null && files.length > 0) {
-//                for (File file : files) {
-//                    info = new StudyInfo(StudyInfo.ITEM_TYPE_LOCAL, new StudyType(file.getName()));
-//                    infoList.add(info);
-//                }
-//            }
             studyListView.showLoading();
-            Observable.create(new Observable.OnSubscribe<File[]>() {
-                @Override
-                public void call(Subscriber<? super File[]> subscriber) {
-                    File[] files = StudyDao.getAllFolders();
-                    subscriber.onNext(files);
-                }
-            }).subscribeOn(Schedulers.newThread())
-                    .map(new Func1<File[], List<StudyInfo>>() {
-                        @Override
-                        public List<StudyInfo> call(File[] files) {
-                            List<StudyInfo> infoList = new ArrayList<>();
-                            StudyInfo info = null;
-                            if (files != null && files.length > 0) {
-                                for (File file : files) {
-                                    info = new StudyInfo(StudyInfo.ITEM_TYPE_LOCAL, new StudyType(file.getName()));
-                                    infoList.add(info);
+            if(studyListParam.studyType == StudyInfo.ITEM_TYPE_LOCAL) {
+                Observable.create(new Observable.OnSubscribe<File[]>() {
+                    @Override
+                    public void call(Subscriber<? super File[]> subscriber) {
+                        File[] files = StudyDao.getAllFolders();
+                        subscriber.onNext(files);
+                    }
+                }).subscribeOn(Schedulers.newThread())
+                        .map(new Func1<File[], List<StudyInfo>>() {
+                            @Override
+                            public List<StudyInfo> call(File[] files) {
+                                List<StudyInfo> infoList = new ArrayList<>();
+                                StudyInfo info = null;
+                                if (files != null && files.length > 0) {
+                                    for (File file : files) {
+                                        info = new StudyInfo(StudyInfo.ITEM_TYPE_LOCAL, new StudyType(file.getName()));
+                                        infoList.add(info);
+                                    }
                                 }
+                                return infoList;
                             }
-                            return infoList;
-                        }
-                    })
-                    .compose(studyListView.<List<StudyInfo>>bindToLife())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Action1<List<StudyInfo>>() {
-                        @Override
-                        public void call(List<StudyInfo> infoList) {
-                            studyListView.hideLoading();
-                            studyListView.loadData(infoList);
-                        }
-                    });
+                        })
+                        .compose(studyListView.<List<StudyInfo>>bindToLife())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<List<StudyInfo>>() {
+                            @Override
+                            public void call(List<StudyInfo> infoList) {
+                                studyListView.hideLoading();
+                                studyListView.loadData(infoList);
+                            }
+                        });
+            }else{
+                List<StudyInfo> infoList = StudyDao.getInstance().getStudyInfos();
+                studyListView.hideLoading();
+                studyListView.loadData(infoList);
+            }
         }
 
 

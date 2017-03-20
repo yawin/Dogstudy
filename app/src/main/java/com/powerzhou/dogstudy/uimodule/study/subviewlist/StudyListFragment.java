@@ -31,21 +31,21 @@ import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter;
  */
 
 public class StudyListFragment extends BaseFragment<IRxBusPresenter> implements IStudyListView {
-    private static final String CHANNEL_TYPE_KEY = "ChannelTypeKey";
+    private static final String STUDY_TYPE_KEY = "StudyType";
 
     @BindView(R.id.study_list_view)
     RecyclerView recyclerView;
 
-    private String channelType;
+    private int studyType;
 
     @Inject
     BaseQuickAdapter mAdapter;
 
 
-    public static StudyListFragment newInstance(String channelType) {
+    public static StudyListFragment newInstance(int studyType) {
         StudyListFragment fragment = new StudyListFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(CHANNEL_TYPE_KEY, channelType);
+        bundle.putInt(STUDY_TYPE_KEY, studyType);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -54,7 +54,7 @@ public class StudyListFragment extends BaseFragment<IRxBusPresenter> implements 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            channelType = getArguments().getString(CHANNEL_TYPE_KEY);
+            studyType = getArguments().getInt(STUDY_TYPE_KEY);
         }
     }
 
@@ -83,7 +83,7 @@ public class StudyListFragment extends BaseFragment<IRxBusPresenter> implements 
 
     @Override
     protected void updateViews() {
-        mPresenter.getData(new StudyListParam(channelType));
+        mPresenter.getData(new StudyListParam(studyType));
     }
 
     @Override

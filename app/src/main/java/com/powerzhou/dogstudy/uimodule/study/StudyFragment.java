@@ -15,6 +15,7 @@ import com.powerzhou.dogstudy.injector.modules.StudyFragmentModule;
 import com.powerzhou.dogstudy.rxbus.event.ChannelEvent;
 import com.powerzhou.dogstudy.uimodule.base.BaseFragment;
 import com.powerzhou.dogstudy.uimodule.base.IRxBusPresenter;
+import com.powerzhou.dogstudy.uimodule.dao.bean.StudyInfo;
 import com.powerzhou.dogstudy.uimodule.dao.bean.StudyType;
 import com.powerzhou.dogstudy.uimodule.study.subviewlist.StudyListFragment;
 import com.powerzhou.dogstudy.uimodule.widget.ViewPagerAdapter;
@@ -67,11 +68,11 @@ public class StudyFragment extends BaseFragment<IRxBusPresenter> implements IStu
         List<String> titles = new ArrayList<>();
         if(hasLocalData){
             titles.add(tab_names[0]);
-            fragments.add(StudyListFragment.newInstance(tab_names[0]));
+            fragments.add(StudyListFragment.newInstance(StudyInfo.ITEM_TYPE_LOCAL));
         }
         if(hasInternet){
             titles.add(tab_names[1]);
-            fragments.add(StudyListFragment.newInstance(tab_names[1]));
+            fragments.add(StudyListFragment.newInstance(StudyInfo.ITEM_TYPE_ITERNET));
         }
         mPageAdapter.setItems(fragments, titles);
     }
