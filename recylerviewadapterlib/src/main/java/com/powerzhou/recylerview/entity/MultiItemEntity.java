@@ -8,6 +8,7 @@ import java.io.Serializable;
 public abstract class MultiItemEntity implements Serializable{
     protected int itemType;
 
+    public MultiItemEntity(){}
     public MultiItemEntity(int itemType) {
         this.itemType = itemType;
     }

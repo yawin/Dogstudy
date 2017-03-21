@@ -8,8 +8,13 @@ import com.powerzhou.dogstudy.util.AssetsHelper;
 import com.powerzhou.dogstudy.util.Constant;
 import com.powerzhou.dogstudy.util.FileUtils;
 import com.powerzhou.dogstudy.util.GsonHelper;
+import com.powerzhou.dogstudy.util.StringUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -39,7 +44,12 @@ public class StudyDao {
         }
         return new File(sourceRootPath).listFiles();
     }
-
+    public static File[] getAllSubFoldersByStudyType(StudyInfo studyInfo){
+        if(!FileUtils.isFolderExist(sourceRootPath)){
+            return null;
+        }
+        return new File(sourceRootPath+File.separator+studyInfo.getStudyType().getTypeName()).listFiles();
+    }
 
     public void initStudyData(Context context){
         //初始化在线数据，暂时不支持放入数据库中
@@ -58,6 +68,46 @@ public class StudyDao {
 
     public List<StudyInfo> getStudyInfos() {
         return studyInfos;
+    }
+
+    public StringBuilder getContentFromPath(String filePath){
+        if(StringUtils.isEmpty(filePath)){
+            return null;
+        }
+        File file = new File(filePath);
+        if(!file.exists() || file.isDirectory()){
+            return null;
+        }
+        BufferedReader sr = null;
+        InputStreamReader isr = null;
+        InputStream is = null;
+        StringBuilder sb = new StringBuilder();
+        try{
+            is = new FileInputStream(file);
+            isr = new InputStreamReader(is,"UTF-8");
+            sr = new BufferedReader(isr);
+            String line = null;
+            while((line = sr.readLine())!=null){
+                sb.append(line).append("\n");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (is != null) {
+                    is.close();
+                }
+                if(isr != null){
+                    isr.close();
+                }
+                if(sr != null){
+                    sr.close();
+                }
+            }catch (Exception e){
+
+            }
+        }
+        return sb;
     }
 
 }

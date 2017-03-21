@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.powerzhou.dogstudy.OwnApplication;
 import com.powerzhou.dogstudy.R;
+import com.powerzhou.dogstudy.injector.component.AppComponent;
 import com.powerzhou.dogstudy.uimodule.widget.EmptyLayout;
 import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -69,7 +71,14 @@ public abstract class BaseActivity<T extends IBasePresenter> extends RxAppCompat
         initViews();
         updateViews();
     }
-
+    /**
+     * 获取 ApplicationComponent
+     *
+     * @return ApplicationComponent
+     */
+    protected AppComponent getAppComponent() {
+        return OwnApplication.getAppComponet();
+    }
     /**
      * 初始化 Toolbar
      *

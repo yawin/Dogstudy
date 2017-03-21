@@ -1,9 +1,11 @@
 package com.powerzhou.dogstudy.uimodule.study.subviewlist;
 
 import android.content.Context;
+import android.view.View;
 
 import com.powerzhou.dogstudy.R;
 import com.powerzhou.dogstudy.uimodule.dao.bean.StudyInfo;
+import com.powerzhou.dogstudy.uimodule.study.subview.SubListActivity;
 import com.powerzhou.recylerview.adapter.BaseMultiItemQuickAdapter;
 import com.powerzhou.recylerview.adapter.BaseViewHolder;
 
@@ -30,11 +32,17 @@ public class StudyListAdapter extends BaseMultiItemQuickAdapter<StudyInfo> {
     }
 
     @Override
-    protected void convert(BaseViewHolder holder, StudyInfo item) {
+    protected void convert(BaseViewHolder holder,final StudyInfo item) {
         switch (item.getItemType()) {
             case StudyInfo.ITEM_TYPE_ITERNET:
             case StudyInfo.ITEM_TYPE_LOCAL:
                 holder.setText(R.id.tx_study_item,item.getStudyType().getTypeName());
+                holder.setOnClickListener(R.id.tx_study_item, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SubListActivity.launch(mContext,item);
+                    }
+                });
                 break;
         }
     }

@@ -1,5 +1,7 @@
 package com.powerzhou.dogstudy.uimodule.dao.bean;
 
+import com.powerzhou.recylerview.entity.MultiItemEntity;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Transient;
 import org.greenrobot.greendao.annotation.Generated;
@@ -8,7 +10,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by Administrator on 2017/3/19 0019.
  */
 @Entity
-public class StudyItemInfo {
+public class StudyItemInfo extends MultiItemEntity {
 
     private String type;
 
@@ -18,6 +20,11 @@ public class StudyItemInfo {
 
     @Transient
     private boolean isRead;
+
+    public StudyItemInfo(int itemType, String type) {
+        super(itemType);
+        this.type = type;
+    }
 
     @Generated(hash = 453654148)
     public StudyItemInfo(String type, String title, String address) {
@@ -52,13 +59,5 @@ public class StudyItemInfo {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public boolean isRead() {
-        return isRead;
-    }
-
-    public void setRead(boolean read) {
-        isRead = read;
     }
 }

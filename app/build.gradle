@@ -71,7 +71,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.trello:rxlifecycle:1.0'
     compile 'com.trello:rxlifecycle-components:1.0'
-    compile 'com.zzhoujay.richtext:richtext:2.4.0'
+    compile 'com.zzhoujay.richtext:richtext:2.4.1'
 
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
     compile 'jp.wasabeef:recyclerview-animators:2.2.3'

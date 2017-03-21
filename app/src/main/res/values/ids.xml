@@ -29,4 +29,10 @@
 
     <item type="id" name="container_study_list">false</item>
 
+    <item type="id" name="iv_back">false</item>
+    <item type="id" name="tv_subtitle">false</item>
+    <item type="id" name="tv_content">false</item>
+
+
+
 </resources>

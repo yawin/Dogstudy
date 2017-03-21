@@ -23,7 +23,12 @@
         <activity android:name=".uimodule.main.MainActivity"
             android:screenOrientation="portrait">
         </activity>
-
+        <activity android:name=".uimodule.study.subview.SubListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".uimodule.study.content.StudyContentActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
